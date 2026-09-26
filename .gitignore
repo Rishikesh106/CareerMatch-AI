@@ -1,0 +1,38 @@
+# Dependencies
+node_modules/
+backend/venv/
+venv/
+.venv/
+
+# Environment Variables
+.env
+*.env.local
+
+# Databases & Runtime
+backend/career_match.db
+backend/career_match.db*
+*.sqlite
+*.sqlite3
+backend/uploads/
+uploads/
+
+# Build and Caches
+frontend/dist/
+frontend/dist-ssr/
+*.egg-info/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+
+# IDE & OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
