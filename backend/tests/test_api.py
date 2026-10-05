@@ -166,3 +166,70 @@ def test_admin_authorization():
     stats = admin_res.json()
     assert stats["total_users"] >= 2
     assert stats["total_jobs"] >= 5
+
+def test_resume_correction_and_docx_generation():
+    # Login as candidate
+    login_res = client.post("/api/auth/login", json={
+        "email": "alex@careermatch.ai",
+        "password": "password123"
+    })
+    token = login_res.json()["tokens"]["access_token"]
+    headers = {"Authorization": f"Bearer {token}"}
+
+    # Get primary resume
+    resumes_res = client.get("/api/resumes", headers=headers)
+    assert resumes_res.status_code == 200
+    resumes = resumes_res.json()
+    assert len(resumes) > 0
+    resume_id = resumes[0]["id"]
+
+    # Get AI corrections
+    corr_res = client.get(f"/api/resumes/{resume_id}/corrections", headers=headers)
+    assert corr_res.status_code == 200
+    data = corr_res.json()
+    assert "corrections" in data
+    assert "corrected_text" in data
+    assert data["corrected_score"] >= data["original_score"]
+    assert data["template_info"]["font_family"] == "Calibri"
+
+    # Test download-corrected endpoint
+    dl_res = client.get(f"/api/resumes/{resume_id}/download-corrected", headers=headers)
+    assert dl_res.status_code == 200
+    assert dl_res.headers["content-type"] == "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+
+def test_resume_matched_jobs_and_direct_apply():
+    # Login as candidate
+    login_res = client.post("/api/auth/login", json={
+        "email": "alex@careermatch.ai",
+        "password": "password123"
+    })
+    token = login_res.json()["tokens"]["access_token"]
+    headers = {"Authorization": f"Bearer {token}"}
+
+    # Get primary resume
+    resumes_res = client.get("/api/resumes", headers=headers)
+    assert resumes_res.status_code == 200
+    resume_id = resumes_res.json()[0]["id"]
+
+    # Match jobs for resume
+    match_res = client.get(f"/api/resumes/{resume_id}/matched-jobs", headers=headers)
+    assert match_res.status_code == 200
+    data = match_res.json()
+    assert "detected_domain" in data
+    assert "detected_experience_tier" in data
+    assert "jobs" in data
+    assert len(data["jobs"]) > 0
+
+    first_job = data["jobs"][0]
+    assert first_job["match_score"] > 50
+    assert "job_url" in first_job
+    assert first_job["job_url"].startswith("http")
+
+    # Apply to job directly
+    apply_res = client.post(f"/api/jobs/{first_job['job_id']}/apply", headers=headers)
+    assert apply_res.status_code == 200
+    apply_data = apply_res.json()
+    assert apply_data["success"] is True
+    assert "job_url" in apply_data
+
+

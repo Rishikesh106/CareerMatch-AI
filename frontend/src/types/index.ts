@@ -118,6 +118,64 @@ export interface ResumeAnalysis {
   created_at: string;
 }
 
+export interface ResumeCorrectionItem {
+  section: string;
+  original: string;
+  corrected: string;
+  issue_identified: string;
+  clarification_applied: string;
+  category: string;
+}
+
+export interface ResumeCorrectionsResult {
+  original_score: number;
+  corrected_score: number;
+  score_delta: number;
+  corrections_count: number;
+  corrections: ResumeCorrectionItem[];
+  original_text: string;
+  corrected_text: string;
+  template_info: {
+    font_family: string;
+    standard_body_pt: number;
+    standard_header_pt: number;
+    standard_title_pt: number;
+    layout: string;
+  };
+}
+
+export interface ResumeMatchedJob {
+  job_id: string;
+  title: string;
+  company: string;
+  location: string;
+  work_type: string;
+  employment_type: string;
+  experience_level: string;
+  salary_min?: number;
+  salary_max?: number;
+  description: string;
+  job_url: string;
+  required_skills: string[];
+  matched_skills: string[];
+  missing_skills: string[];
+  match_score: number;
+  domain: string;
+  is_fresher_friendly: boolean;
+  domain_match: boolean;
+}
+
+export interface ResumeMatchedJobsResponse {
+  resume_id: string;
+  candidate_name: string;
+  detected_domain: string;
+  detected_experience_tier: string;
+  experience_reason: string;
+  is_fresher: boolean;
+  total_matched_jobs: number;
+  jobs: ResumeMatchedJob[];
+}
+
 export interface Job {
   id: string;
   title: string;

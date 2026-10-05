@@ -113,6 +113,9 @@ class ApiClient {
     setPrimary: (id: string) => this.request<any>(`/resumes/${id}/primary`, { method: 'PUT' }),
     delete: (id: string) => this.request<any>(`/resumes/${id}`, { method: 'DELETE' }),
     getAnalysis: (id: string) => this.request<ResumeAnalysis>(`/resumes/${id}/analysis`),
+    getCorrections: (id: string) => this.request<any>(`/resumes/${id}/corrections`),
+    saveCorrected: (id: string) => this.request<Resume>(`/resumes/${id}/save-corrected`, { method: 'POST' }),
+    getMatchedJobs: (id: string) => this.request<any>(`/resumes/${id}/matched-jobs`),
   };
 
   // --- Jobs ---
@@ -122,6 +125,7 @@ class ApiClient {
       return this.request<Job[]>(`/jobs${query ? `?${query}` : ''}`);
     },
     get: (id: string) => this.request<Job>(`/jobs/${id}`),
+    apply: (id: string) => this.request<any>(`/jobs/${id}/apply`, { method: 'POST' }),
     analyzeJD: (body: { description: string; title?: string; company?: string }) =>
       this.request<any>('/jobs/analyze-jd', { method: 'POST', body: JSON.stringify(body) }),
     delete: (id: string) => this.request<any>(`/jobs/${id}`, { method: 'DELETE' }),

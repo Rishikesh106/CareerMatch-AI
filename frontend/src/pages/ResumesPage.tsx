@@ -185,14 +185,14 @@ export const ResumesPage: React.FC = () => {
 
                 {/* Card Actions */}
                 <div className="mt-5 pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
-                  <div className="flex items-center gap-2">
+                  <div className="flex flex-wrap items-center gap-2">
                     <Button
                       onClick={() => navigate(`/dashboard/resumes/${resume.id}/analysis`)}
                       variant="primary"
                       size="sm"
                       leftIcon={<Sparkles className="w-3.5 h-3.5" />}
                     >
-                      AI Analysis
+                      AI Fix & Clarify
                     </Button>
                     <Button
                       onClick={() => { setSelectedResume(resume); setViewModal(true); }}

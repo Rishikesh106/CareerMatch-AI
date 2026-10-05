@@ -1,6 +1,15 @@
 import os
 import re
-import fitz  # PyMuPDF
+try:
+    import fitz  # PyMuPDF
+except Exception:
+    fitz = None
+
+try:
+    import pypdf
+except Exception:
+    pypdf = None
+
 import docx
 from typing import Dict, Any, List, Optional
 from app.ai.mock_provider import ALL_KNOWN_SKILLS
@@ -14,13 +23,28 @@ class ResumeParser:
     @staticmethod
     def extract_text_from_pdf(file_path: str) -> str:
         text = ""
-        try:
-            with fitz.open(file_path) as doc:
-                for page in doc:
-                    text += page.get_text() + "\n"
-        except Exception as e:
-            text = f"Error reading PDF: {str(e)}"
-        return text.strip()
+        if fitz is not None:
+            try:
+                with fitz.open(file_path) as doc:
+                    for page in doc:
+                        text += page.get_text() + "\n"
+                if text.strip():
+                    return text.strip()
+            except Exception:
+                pass
+
+        if pypdf is not None:
+            try:
+                reader = pypdf.PdfReader(file_path)
+                for page in reader.pages:
+                    extracted = page.extract_text()
+                    if extracted:
+                        text += extracted + "\n"
+                return text.strip()
+            except Exception as e:
+                return f"Error reading PDF: {str(e)}"
+
+        return "Error reading PDF: No PDF parser available"
 
     @staticmethod
     def extract_text_from_docx(file_path: str) -> str:
