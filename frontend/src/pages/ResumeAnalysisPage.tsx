@@ -50,7 +50,7 @@ export const ResumeAnalysisPage: React.FC = () => {
     if (!resumeId) return;
     try {
       const token = localStorage.getItem('access_token');
-      const res = await fetch(`/api/resumes/${resumeId}/download-corrected`, {
+      const res = await fetch(api.resumes.downloadCorrectedUrl(resumeId), {
         headers: {
           Authorization: `Bearer ${token}`
         }

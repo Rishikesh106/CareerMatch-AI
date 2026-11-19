@@ -4,7 +4,7 @@ import {
   Notification, AdminStats
 } from '../types';
 
-const API_BASE = '/api';
+export const API_BASE = (import.meta.env.VITE_API_BASE_URL || '/api').replace(/\/+$/, '');
 
 class ApiClient {
   private getHeaders(isFormData = false): HeadersInit {
@@ -116,6 +116,7 @@ class ApiClient {
     getCorrections: (id: string) => this.request<any>(`/resumes/${id}/corrections`),
     saveCorrected: (id: string) => this.request<Resume>(`/resumes/${id}/save-corrected`, { method: 'POST' }),
     getMatchedJobs: (id: string) => this.request<any>(`/resumes/${id}/matched-jobs`),
+    downloadCorrectedUrl: (id: string) => `${API_BASE}/resumes/${id}/download-corrected`,
   };
 
   // --- Jobs ---

@@ -277,7 +277,7 @@ CareerMatch-AI/
 
 ### 1. Clone Repository
 ```bash
-git clone https://github.com/your-username/CareerMatch-AI.git
+git clone https://github.com/Rishikesh106/CareerMatch-AI.git
 cd CareerMatch-AI
 ```
 

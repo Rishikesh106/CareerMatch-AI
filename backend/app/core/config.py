@@ -22,7 +22,7 @@ class Settings(BaseSettings):
         "http://localhost:3000",
         "http://127.0.0.1:3000",
         "http://localhost:8080",
-    ]
+    ] + [o.strip() for o in os.getenv("CORS_ORIGINS", "").split(",") if o.strip()]
     
     # Database (Default to sqlite for seamless zero-setup local dev, or postgresql via .env)
     DATABASE_URL: str = os.getenv("DATABASE_URL", "sqlite:///./career_match.db")
