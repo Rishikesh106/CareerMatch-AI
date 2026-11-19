@@ -4,7 +4,8 @@ import {
   Notification, AdminStats
 } from '../types';
 
-export const API_BASE = (import.meta.env.VITE_API_BASE_URL || '/api').replace(/\/+$/, '');
+const rawBase = (import.meta.env.VITE_API_BASE_URL || '/api').replace(/\/+$/, '');
+export const API_BASE = rawBase.endsWith('/api') ? rawBase : `${rawBase}/api`;
 
 class ApiClient {
   private getHeaders(isFormData = false): HeadersInit {
