@@ -25,7 +25,7 @@ class Settings(BaseSettings):
     ] + [o.strip() for o in os.getenv("CORS_ORIGINS", "").split(",") if o.strip()]
     
     # Database (Default to sqlite for seamless zero-setup local dev, or postgresql via .env)
-    DATABASE_URL: str = os.getenv("DATABASE_URL", "sqlite:///./career_match.db")
+    DATABASE_URL: str = os.getenv("DATABASE_URL", "sqlite:///./career_match.db").replace("postgres://", "postgresql://", 1)
     
     # Redis
     REDIS_URL: str = os.getenv("REDIS_URL", "redis://localhost:6379/0")
