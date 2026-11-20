@@ -12,13 +12,13 @@
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-v4.0-06B6D4.svg?style=flat-square&logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
 [![SQLAlchemy](https://img.shields.io/badge/SQLAlchemy-2.0-D71F00.svg?style=flat-square&logo=sqlalchemy&logoColor=white)](https://www.sqlalchemy.org)
 [![Tests](https://img.shields.io/badge/Pytest-10%2F10%20Passing-brightgreen.svg?style=flat-square&logo=pytest&logoColor=white)](https://pytest.org)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](LICENSE)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Online-brightgreen?style=flat-square&logo=render)](https://careermatch-ai-oh8i.onrender.com)
 
 ### **"Know Your Fit. Fix Every Mistake. Apply Directly."**
 
 An all-in-one AI platform that evaluates your resume health, **auto-corrects mistakes in your exact template**, matches curated company roles tailored to your domain and experience level, and lets you **apply directly with 1-click Kanban tracking**.
 
-[⚡ Quick Demo](#-live-demo-accounts) • [🥊 The Problem vs Solution](#-the-problem-statement--our-solution) • [🔍 Interactive Case Study](#-interactive-case-study-from-85-to-97100) • [✨ Feature Showcase](#-feature-showcase) • [🚀 Quickstart](#-quickstart--local-setup)
+[🌐 Live Demo App](https://careermatch-ai-oh8i.onrender.com) • [⚡ Demo Credentials](#-live-demo-accounts) • [🥊 The Problem vs Solution](#-the-problem-statement--our-solution) • [🔍 Interactive Case Study](#-interactive-case-study-from-85-to-97100) • [✨ Feature Showcase](#-feature-showcase) • [🚀 Quickstart](#-quickstart--local-setup)
 
 </div>
 
